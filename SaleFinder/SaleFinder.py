@@ -3,15 +3,15 @@ import requests
 
 
 class URL:
-    """Represents the URLs relevant to the inputted keywords. The parameters are a link from a website and a list of
-    words. """
+    """Represents the URLs relevant to the inputted keywords. The parameters are a link from a website, named link. """
 
     def __init__(self, link):
         self._link = link
+        self._keywords = []
 
     def scrape(self, keywords):
         """Returns the results from the URL object using BeautifulSoup and Requests to scrape. The parameter keywords
-        allows to user to scrape for specific phrases."""
+        is a list of strings and this allows to user to scrape for specific words and phrases."""
         self._keywords = keywords
         test_page = requests.get(self._link)
         soup = BeautifulSoup(test_page.text, "html.parser")
@@ -22,20 +22,30 @@ class URL:
                 for word in self._keywords:
                     if word.lower() in link_text.lower():
                         url = link.get('href')
-                        print(url)
 
 
 class TextFile:
-    """Represents a textfile object with methods to add, remove, edit a textfile with the data from the URL object"""
+    """Represents a textfile object with methods to create, add, remove, edit a textfile with the data from the URL
+    object"""
+    def __init__(self):
+        self._urls = ''
+        self._text_file = ''
+    def create_file(self, urls):
+        self._urls = str(urls)
+        with open('links.txt', 'w') as file:
+            file.write(urls)
 
 
 def main():
     url_name = "https://news.search.yahoo.com/search;_ylt=AwrO6mi2JcRkrHcLDjPQtDMD;_ylu" \
-               "=Y29sbwNncTEEcG9zAzEEdnRpZAMEc2VjA3BhZ2luYXRpb24-?p=shopping+clearance+sale&pz=10&fr=uh3_news_web&fr2=sb" \
-               "-top&bct=0&b=1&pz=10&bct=0&xargs=0"
+               "=Y29sbwNncTEEcG9zAzEEdnRpZAMEc2VjA3BhZ2luYXRpb24-?p=shopping+clearance+sale&pz=10&fr=uh3_news_web&fr2" \
+               "=sb-top&bct=0&b=1&pz=10&bct=0&xargs=0"
     key_words = ['close', 'closure', 'closing', 'nordstrom', 'target']
-    url_objet = URL(url_name)
-    url_objet.scrape(key_words)
+    url_object = URL(url_name)
+    url = url_object.scrape(key_words)
+    file = TextFile()
+    file.create_file(url)
+
 
 
 if __name__ == '__main__':
