@@ -27,21 +27,20 @@ class URL:
         return relevant_links
 
 
-
-
-
 class TextFile:
     """Represents a textfile object with methods to create, add, remove, edit a textfile with the data from the URL
     object"""
+
     def __init__(self):
         self._urls = ''
         self._text_file = ''
+
     def create_file(self, urls):
         self._urls = urls
         for elements in urls:
             str(elements)
-        with open('links.txt', 'w') as file:
-            file.write(elements)
+        with open('links.txt', 'w') as self._file:
+            self._file.write(elements)
 
 
 def main():
@@ -51,10 +50,9 @@ def main():
     key_words = ['close', 'closure', 'closing', 'nordstrom', 'target']
     url_object = URL(url_name)
     url = url_object.scrape(key_words)
-    print(url) # this is a list
+    print(url)  # this is a list
     file = TextFile()
     file.create_file(url)
-
 
 
 if __name__ == '__main__':
