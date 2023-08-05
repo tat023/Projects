@@ -21,7 +21,8 @@ class URL:
                 link_text = link.get_text()
                 for word in self._keywords:
                     if word.lower() in link_text.lower():
-                        url = link.get('href')
+                        url = str(link.get('href'))
+                        return url
 
 
 class TextFile:
@@ -31,7 +32,7 @@ class TextFile:
         self._urls = ''
         self._text_file = ''
     def create_file(self, urls):
-        self._urls = str(urls)
+        self._urls = urls
         with open('links.txt', 'w') as file:
             file.write(urls)
 
