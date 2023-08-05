@@ -13,6 +13,7 @@ class URL:
         """Returns the results from the URL object using BeautifulSoup and Requests to scrape. The parameter keywords
         is a list of strings and this allows to user to scrape for specific words and phrases."""
         self._keywords = keywords
+        relevant_links = []
         test_page = requests.get(self._link)
         soup = BeautifulSoup(test_page.text, "html.parser")
         link_names = soup.find_all('a')
@@ -22,7 +23,11 @@ class URL:
                 for word in self._keywords:
                     if word.lower() in link_text.lower():
                         url = str(link.get('href'))
-                        return url
+                        relevant_links.append(url)
+        return relevant_links
+
+
+
 
 
 class TextFile:
@@ -33,8 +38,10 @@ class TextFile:
         self._text_file = ''
     def create_file(self, urls):
         self._urls = urls
+        for elements in urls:
+            str(elements)
         with open('links.txt', 'w') as file:
-            file.write(urls)
+            file.write(elements)
 
 
 def main():
@@ -44,6 +51,7 @@ def main():
     key_words = ['close', 'closure', 'closing', 'nordstrom', 'target']
     url_object = URL(url_name)
     url = url_object.scrape(key_words)
+    print(url) # this is a list
     file = TextFile()
     file.create_file(url)
 
