@@ -37,10 +37,10 @@ class TextFile:
 
     def create_file(self, urls):
         self._urls = urls
-        for elements in urls:
-            str(elements)
         with open('links.txt', 'w') as self._file:
-            self._file.write(elements)
+            for elements in self._urls:
+                url_string = str(elements)
+                self._file.write(url_string + '\n')
 
 
 def main():
