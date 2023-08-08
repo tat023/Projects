@@ -8,5 +8,7 @@ Python 3.11.0
 BeautifulSoup
 
 Requests
+
+os
 ## License
 This project is licensed under the MIT License.

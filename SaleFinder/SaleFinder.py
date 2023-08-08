@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import requests
+import os
 
 
 class URL:
@@ -34,13 +35,29 @@ class TextFile:
     def __init__(self):
         self._urls = ''
         self._text_file = ''
+    def get_file(self):
+        """Method that returns self._text_file"""
+        return self._text_file
 
     def create_file(self, urls):
+        """Function creates a text file with the links of the search results and saves the file into a read only
+        format"""
         self._urls = urls
-        with open('links.txt', 'w') as self._file:
+        with open('links.txt', 'w') as self._text_file:
             for elements in self._urls:
                 url_string = str(elements)
-                self._file.write(url_string + '\n')
+                self._text_file.write(url_string + '\n')
+        os.chmod(self._text_file, 0o444)
+    def edit_file(self, text_file):
+        """Function makes the text file writeable and edits the read only file from the function create_file.
+        The parameter text_file is the TextFile object created"""
+        self._text_file = text_file
+        os.chmod(self._text_file, 0o644)
+
+
+
+
+
 
 
 def main():
@@ -50,9 +67,9 @@ def main():
     key_words = ['close', 'closure', 'closing', 'nordstrom', 'target']
     url_object = URL(url_name)
     url = url_object.scrape(key_words)
-    print(url)  # this is a list
     file = TextFile()
     file.create_file(url)
+    print(file.get_file())
 
 
 if __name__ == '__main__':
