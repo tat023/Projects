@@ -54,7 +54,7 @@ def main():
                                                     'is sent in the clear (bad)']
     ob.add_terms(third_list)
     ob.get_dictionary()
-    word = 'SMS'
+    word = 'cat'
     ob.delete_term(word)
     ob.get_dictionary()
 
