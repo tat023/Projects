@@ -47,12 +47,12 @@ class TextFile:
             for elements in self._urls:
                 url_string = str(elements)
                 self._text_file.write(url_string + '\n')
-        os.chmod(self._text_file, 0o444)
-    def edit_file(self, text_file):
+       # os.chmod(self._text_file, 0o444)
+    #def edit_file(self, text_file):
         """Function makes the text file writeable and edits the read only file from the function create_file.
         The parameter text_file is the TextFile object created"""
-        self._text_file = text_file
-        os.chmod(self._text_file, 0o644)
+     #   self._text_file = text_file
+      #  os.chmod(self._text_file, 0o644)
 
 
 
@@ -61,12 +61,11 @@ class TextFile:
 
 
 def main():
-    url_name = "https://news.search.yahoo.com/search;_ylt=AwrO6mi2JcRkrHcLDjPQtDMD;_ylu" \
-               "=Y29sbwNncTEEcG9zAzEEdnRpZAMEc2VjA3BhZ2luYXRpb24-?p=shopping+clearance+sale&pz=10&fr=uh3_news_web&fr2" \
-               "=sb-top&bct=0&b=1&pz=10&bct=0&xargs=0"
-    key_words = ['close', 'closure', 'closing', 'nordstrom', 'target']
+    url_name = "https://legal.yahoo.com/us/en/yahoo/privacy/index.html"
+    key_words = ['privacy']
     url_object = URL(url_name)
     url = url_object.scrape(key_words)
+    print(url)
     file = TextFile()
     file.create_file(url)
     print(file.get_file())
