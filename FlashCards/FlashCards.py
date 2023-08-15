@@ -1,5 +1,5 @@
 class Term:
-    """Represents a list of terms.  This list will be converted to a dictionary"""
+    """Represents a list of terms. This list will be converted to a dictionary"""
 
     def __init__(self, list):
         self._list = list
@@ -19,18 +19,25 @@ class Term:
 
     def delete_term(self, key):
         """Takes the parameter key, a string, and deletes that key value pair if the input matches a key in the
-        dictionary. Returns a statement if this is completely successfully or if the key does not exist"""
+        dictionary. Returns a statement if this is completed successfully, the key is typed incorrectly,
+         or if the key does not exist"""
         if key in self._dict.keys():
             self._dict.pop(key)
             return print(f"{key} has been deleted")
         if key not in self._dict.keys():
+            for term in self._dict:
+                if key.lower() == term.lower():
+                    return print(f"{key} has a typo, this is case sensitive")  # will create a better method
             return print(f"{key} is not a term")
-
 
     def get_dictionary(self):
         """Returns and prints the dictionary and any updates that may have been made"""
         print(self._dict)
         return self._dict
+
+
+class Flashcard:
+    """Represents an individual key value pair from the Term object"""
 
 
 def main():
@@ -53,9 +60,16 @@ def main():
                   'intercept', 'Push notification', 'Uses an authentication factor pushed to an app, sometimes push'
                                                     'is sent in the clear (bad)']
     ob.add_terms(third_list)
+    fourth_list = ['Pseudo random token generator', 'can be an app or device, many use TOTP', 'TOTP',
+                   'Time based on time passwd algorithm, uses a secret key and time of day', 'HOTP',
+                   'HMAC-based one time password algorithm, One-time psswd, never use it again, hash is diff everytime',
+                   'Phone call', 'call gives you a random number, same disadvs as text (interception, forwarded',
+                   'Static code', 'authentication that does not change, like pin or psswrds', 'Smart card',
+                   'integrated circuit card, credit cards or access control cards, something you have']
+    ob.add_terms(fourth_list)
     ob.get_dictionary()
-    word = 'cat'
-    ob.delete_term(word)
+    term = 'cat'
+    ob.delete_term(term)
     ob.get_dictionary()
 
 
