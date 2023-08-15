@@ -30,15 +30,22 @@ class Term:
                     return print(f"{key} has a typo, this is case sensitive")  # will create a better method
             return print(f"{key} is not a term")
 
-    def get_dictionary(self):
-        """Returns and prints the dictionary and any updates that may have been made"""
+    def print_dictionary(self):
+        """Prints the dictionary and any updates that may have been made"""
         print(self._dict)
+
+    def get_dictionary(self):
+        """Returns the dictionary"""
         return self._dict
 
 
 class Flashcard:
     """Represents an individual key value pair from the Term object"""
-
+    def __init__(self, term_ob):
+        self._term_ob = term_ob
+    def generate_card(self):
+        """Presents a key in the dictionary from the Term object and 4 different values, numbered 1-4.
+        User will input the number that corresponds with the correct value for that key"""
 
 def main():
     first_list = ['Continuous integration (CI)', 'Code is constantly written and merged into a central repo frequently',
@@ -67,10 +74,12 @@ def main():
                    'Static code', 'authentication that does not change, like pin or psswrds', 'Smart card',
                    'integrated circuit card, credit cards or access control cards, something you have']
     ob.add_terms(fourth_list)
-    ob.get_dictionary()
+    ob.print_dictionary()
     term = 'cat'
     ob.delete_term(term)
-    ob.get_dictionary()
+    ob.print_dictionary()
+    card = Flashcard(ob)
+    print(card)
 
 
 if __name__ == '__main__':
