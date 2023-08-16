@@ -1,3 +1,6 @@
+import random
+
+
 class Term:
     """Represents a list of terms. This list will be converted to a dictionary"""
 
@@ -23,12 +26,12 @@ class Term:
          or if the key does not exist"""
         if key in self._dict.keys():
             self._dict.pop(key)
-            return print(f"{key} has been deleted")
+            return print(f'{key} has been deleted')
         if key not in self._dict.keys():
             for term in self._dict:
                 if key.lower() == term.lower():
-                    return print(f"{key} has a typo, this is case sensitive")  # will create a better method
-            return print(f"{key} is not a term")
+                    return print(f'{key} has a typo, this is case sensitive')  # will create a better method
+            return print(f'{key} is not a term')
 
     def print_dictionary(self):
         """Prints the dictionary and any updates that may have been made"""
@@ -38,17 +41,31 @@ class Term:
         """Returns the dictionary"""
         return self._dict
 
-import random
+
 class Flashcard:
     """Represents an individual key value pair from the Term object"""
+
     def __init__(self, term_ob):
         self._term_ob = term_ob
-    def generate_card(self):
-        """"""
+        self._key_list = []
+
+    def shuffle_cards(self):
+        """Method uses random to shuffle the keys in the dictionary from the Term object into a randomized list"""
         larger_dict = self._term_ob.get_dictionary()
-        terms = list(larger_dict.keys())
-        random.shuffle(terms)
-        print(terms)
+        all_terms = larger_dict.keys()
+        for words in all_terms:
+            self._key_list.append(words)
+            random.shuffle(self._key_list)
+        return self._key_list
+
+    def display_matches(self):
+        """Method displays a key and 4 values from dictionary from the Term object. If none of th values match the key
+        the user will select 'None of the above' """
+        index_num = random.randint(0, len(self._key_list))
+        selected_term = self._key_list[index_num]
+        print(
+            f'Please select the definition for {selected_term}. If none of these definitions match, select "None of '
+            f'the above".')
 
 
 def main():
@@ -82,7 +99,8 @@ def main():
     ob.delete_term(term)
     card = Flashcard(ob)
     print(card)
-    card.generate_card()
+    print(card.shuffle_cards())
+    card.display_matches()
 
 
 if __name__ == '__main__':
