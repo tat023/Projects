@@ -38,12 +38,18 @@ class Term:
         """Returns the dictionary"""
         return self._dict
 
-
+import random
 class Flashcard:
     """Represents an individual key value pair from the Term object"""
     def __init__(self, term_ob):
         self._term_ob = term_ob
     def generate_card(self):
+        """"""
+        larger_dict = self._term_ob.get_dictionary()
+        terms = list(larger_dict.keys())
+        random.shuffle(terms)
+        print(terms)
+
 
 def main():
     first_list = ['Continuous integration (CI)', 'Code is constantly written and merged into a central repo frequently',
@@ -72,12 +78,11 @@ def main():
                    'Static code', 'authentication that does not change, like pin or psswrds', 'Smart card',
                    'integrated circuit card, credit cards or access control cards, something you have']
     ob.add_terms(fourth_list)
-    ob.print_dictionary()
     term = 'cat'
     ob.delete_term(term)
-    ob.print_dictionary()
     card = Flashcard(ob)
     print(card)
+    card.generate_card()
 
 
 if __name__ == '__main__':
