@@ -79,9 +79,19 @@ class Flashcard:
             random_def = random.randint(0, len(self._def_list))
             mult_choice = self._def_list[random_def]
             all_options.append(mult_choice)
-        for defs in all_options:
-            print(defs)
+        for definitions in all_options:
+            print(definitions)
         user_input = input("Your answer: ")
+        if user_input == "None of the above":
+            for choices in range(0, 3):
+                random_def = random.randint(0, len(self._def_list))
+                mult_choice = self._def_list[random_def]
+                all_options.append(mult_choice)
+            for definitions in all_options:
+                print(definitions)
+        user_input = input("Your answer: ") # find better way to do this
+
+
 
 
 
