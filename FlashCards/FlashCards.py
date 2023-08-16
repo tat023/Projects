@@ -44,8 +44,6 @@ class Flashcard:
     def __init__(self, term_ob):
         self._term_ob = term_ob
     def generate_card(self):
-        """Presents a key in the dictionary from the Term object and 4 different values, numbered 1-4.
-        User will input the number that corresponds with the correct value for that key"""
 
 def main():
     first_list = ['Continuous integration (CI)', 'Code is constantly written and merged into a central repo frequently',
