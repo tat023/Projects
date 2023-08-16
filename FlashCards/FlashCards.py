@@ -48,24 +48,41 @@ class Flashcard:
     def __init__(self, term_ob):
         self._term_ob = term_ob
         self._key_list = []
+        self._def_list = []
 
     def shuffle_cards(self):
-        """Method uses random to shuffle the keys in the dictionary from the Term object into a randomized list"""
+        """Method uses random to shuffle the keys and values in the dictionary from the Term object into a
+        randomized list"""
         larger_dict = self._term_ob.get_dictionary()
         all_terms = larger_dict.keys()
+        all_defs = larger_dict.values()
         for words in all_terms:
             self._key_list.append(words)
             random.shuffle(self._key_list)
-        return self._key_list
+        for definitions in all_defs:
+            self._def_list.append(definitions)
+            random.shuffle(self._def_list)
+        return self._key_list, self._def_list
 
     def display_matches(self):
-        """Method displays a key and 4 values from dictionary from the Term object. If none of th values match the key
-        the user will select 'None of the above' """
+        """Method displays a key and 4 values from dictionary from the Term object. If none of the values match the key
+        the user will type 'None of the above' """
         index_num = random.randint(0, len(self._key_list))
         selected_term = self._key_list[index_num]
         print(
-            f'Please select the definition for {selected_term}. If none of these definitions match, select "None of '
+            f'Please select the definition for {selected_term}. If none of these definitions match, type "None of '
             f'the above".')
+        correct_choice = self._def_list[index_num]
+        all_options = []
+        all_options.append(correct_choice)
+        for choices in range(0,3):
+            random_def = random.randint(0, len(self._def_list))
+            mult_choice = self._def_list[random_def]
+            all_options.append(mult_choice)
+        for defs in all_options:
+            print(defs)
+        user_input = input("Your answer: ")
+
 
 
 def main():
