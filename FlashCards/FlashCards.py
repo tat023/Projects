@@ -62,27 +62,18 @@ class Flashcard:
             self._def_list.append(definitions)
         return self._key_list, self._def_list
 
-    def display_matches(self):
+    def start_studying(self):
         """Method displays a key and 4 values from dictionary from the Term object. If none of the values match the key
         the user will type 'None of the above' """
-        index_num = random.randint(0, len(self._key_list))
-        selected_term = self._key_list[index_num]
-        print(
-            f'Please select the definition for {selected_term}. If none of these definitions match, type "None of '
-            f'the above".')
-        correct_choice = self._def_list[index_num]
-        all_options = [correct_choice]
-        for choices in range(0, 3):
-            random_def = random.randint(0, len(self._def_list))
-            mult_choice = self._def_list[random_def]
-            all_options.append(mult_choice)
-            random.shuffle(all_options)
-        for definitions in all_options:
-            print(definitions)
-        user_input = input("Your answer: ")
-        while user_input == "None of the above":
-            all_options = []
-            all_options.append(correct_choice)
+        terms_covered = set()
+        while len(terms_covered) < len(self._key_list):
+            index_num = random.randint(0, len(self._key_list) - 1)
+            selected_term = self._key_list[index_num]
+            print(
+                f'Please select the definition for {selected_term}. If none of these definitions match, type "None of '
+                f'the above".')
+            correct_choice = self._def_list[index_num]
+            all_options = [correct_choice]
             for choices in range(0, 3):
                 random_def = random.randint(0, len(self._def_list))
                 mult_choice = self._def_list[random_def]
@@ -91,14 +82,23 @@ class Flashcard:
             for definitions in all_options:
                 print(definitions)
             user_input = input("Your answer: ")
-        while user_input != correct_choice:
-            user_try = input("Try again: ")
-            if user_try == correct_choice:
+            while user_input == "None of the above":
+                all_options = [correct_choice]
+                for choices in range(0, 3):
+                    random_def = random.randint(0, len(self._def_list))
+                    mult_choice = self._def_list[random_def]
+                    all_options.append(mult_choice)
+                    random.shuffle(all_options)
+                for definitions in all_options:
+                    print(definitions)
+                user_input = input("Your answer: ")
+            while user_input != correct_choice:
+                user_try = input("Try again: ")
+                if user_try == correct_choice:
+                    print("That's right!")
+                    break
+            if user_input == correct_choice:
                 print("That's right!")
-                break
-        if user_input == correct_choice:
-            print("That's right!")
-
 
 
 def main():
@@ -188,7 +188,7 @@ def main():
     ob.add_terms(network_redundancy_terms)
     card = Flashcard(ob)
     card.shuffle_cards()
-    card.display_matches()
+    card.start_studying()
 
 
 if __name__ == '__main__':
