@@ -58,10 +58,8 @@ class Flashcard:
         all_defs = larger_dict.values()
         for words in all_terms:
             self._key_list.append(words)
-            random.shuffle(self._key_list)
         for definitions in all_defs:
             self._def_list.append(definitions)
-            random.shuffle(self._def_list)
         return self._key_list, self._def_list
 
     def display_matches(self):
@@ -78,19 +76,29 @@ class Flashcard:
             random_def = random.randint(0, len(self._def_list))
             mult_choice = self._def_list[random_def]
             all_options.append(mult_choice)
+            random.shuffle(all_options)
         for definitions in all_options:
             print(definitions)
         user_input = input("Your answer: ")
-        if user_input == correct_choice:
-            print("That's right!")
         while user_input == "None of the above":
+            all_options = []
+            all_options.append(correct_choice)
             for choices in range(0, 3):
                 random_def = random.randint(0, len(self._def_list))
                 mult_choice = self._def_list[random_def]
                 all_options.append(mult_choice)
+                random.shuffle(all_options)
             for definitions in all_options:
                 print(definitions)
             user_input = input("Your answer: ")
+        while user_input != correct_choice:
+            user_try = input("Try again: ")
+            if user_try == correct_choice:
+                print("That's right!")
+                break
+        if user_input == correct_choice:
+            print("That's right!")
+
 
 
 def main():
