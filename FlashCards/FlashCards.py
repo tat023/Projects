@@ -274,7 +274,76 @@ def main():
                               'distances and create a mesh network of devices',
                     'ISM band', 'freq that zigbee communicates on']
     ob.add_terms(embedded_sys)
-    embedded_syscontraints = []
+    embedded_syscontraints = ['Constraint due to how embedded system is built', 'limited/missing features and power issues',
+                              'Other constraints', 'has low CPU and type and speed of networks available, some cannot'
+                                                   'be upgraded or doesnt even have authentication process']
+    ob.add_terms(embedded_syscontraints)
+    physical_securitycontrols = ['Purpose of physical barriers', 'safety, prevent access', 'Access control vestibules',
+                                 'door opening mechanism, there is a set normal and action causes lock/unlock',
+                                 'Signs', 'physical security control that gives clear, specific instruction for EEs and '
+                                          'visitors', 'alarms', 'physical control that is circuit based', 'CCTV', 'c'
+                                                                                                                  'losed '
+                                                                                                                  'circuit '
+                                                                                                                  'TV',
+                                 'Industrial camouflage', 'concealing an important facility in plain sight, like making '
+                                                          'it look like a warehouse or something with no visual clues or'
+                                                          ' signs', 'Guards and access lists', 'security using people'
+                                                                                               ' prevents guests from '
+                                                                                               'coming',
+                                 'Two person integrity/control', 'ensures no single person has access to assets, can use'
+                                                                 'robot guards',
+                                 'Door access controls', 'Conventional, deadbolt, electronic (pin) or token based (key '
+                                                         'fob), or multi-factor',
+                                 'Cable locks', 'temp locks and can work almost anywhere, actual cable with reinforced '
+                                                'notch, def can cut this', 'USB data blocker', 'allow the voltage of a '
+                                                                                               'USB but rejects the '
+                                                                                               'data',
+                                 'Proper lighting', 'type of security because attackers dont want to be seen', 'Fencing',
+                                 'physical security measure around the perimeter', 'Fire suppression',
+                                 'remember these are electronics, water may not be best, Halon is bad, use Dupont FM',
+                                 'Sensors', 'motion, noise, proximity, moisture, temp', 'Drone usage', 'may be used for '
+                                                                                                       'security for '
+                                                                                                       'example site'
+                                                                                                       'damage',
+                                 'Faraday cage', 'blocks some types of signals, like the window of microwave oven',
+                                 'Screened subnet or DMZ', 'a network with a controlled access through a firewall '
+                                                           'and gives public access and keeps private items private',
+                                 'PDS', 'protected distribution system, must keep cables in physically secure'
+                                        'area. Prevents breakage, tapping, and DoS', 'Secure Areas',
+                                 'Physical barrier to internal systems', 'air gap', 'physical separation between'
+                                                                                    'networks so it would never be possible'
+                                                                                    'for someone to get access through'
+                                                                                    'shared network, like in stock market',
+                                 'Vaults and safes', 'provides a secure room onsite', 'Hot and cold aisles',
+                                 'these systems create heat, we need a cooling system that isnt too expensive so this '
+                                 'helps by separating the air']
+    ob.add_terms(physical_securitycontrols)
+    secure_datadestruction = ['Why is proper data destruction and media sanitization important',
+                              'Disposal can be a legal issue, critical info could end up in trash, you might want to resuse device',
+                              'Garbage', 'can be used for malicious activity, shred it, burn, or pulp',
+                              'Physical destruction', 'shredding drilling, pulverizing, electromag/degaussing',
+                              '3rd party destruction will give', 'a certificate this was completed with'
+                                                                 'the devices', 'Sanitizing media',
+                              'purging data (some data) or wipe (unrecoverable, so we can reuse)']
+    ob.add_terms(secure_datadestruction)
+    crypt_concepts = ['cryptography uses', 'allows us to make things confidential, authenticate, non-repudiation, '
+                                           'integrity', 'plaintext', 'unencrypted in the clear message', 'ciphertext',
+                      'encrypted message', 'cipher', 'algorithm used to encrypt or decrypt', 'cryptographic keys',
+                      'used to encrypt by adding to cipher, larger is better, mult can add more protection',
+                      'key stretching', 'can use weak keys to make it stronger, hash pw and hash the hash', 'key '
+                                                                                                            'stretching'
+                                                                                                            'library',
+                      'bcrypt, PBKDF2', 'Lightweight cryptography', 'a type of cryptography that does not need a high end CPU'
+                                                                    'or a ton of power, comes from IoT devices',
+                      'Homomorphic encryption', 'HE, makes encrypted data easier to work with by allow you to make calc '
+                                                'with encrypted data, doesnt get decrypted at all, good with cloud',
+                      'symmetric encryption', 'uses single shared key to encrypt and decrypt, bad if key gets out and '
+                                              'scales poorly, like carrying the key in the locked case', 'asymmetric '
+                                                                                                         'encryption',
+                      'uses two or more keys, also known as public key cryptography, takes more overhead, you have a '
+                      'public key (encrypt)  and private key (decrypt)', 'they key pair',
+                      'large random number runs through key generation  number, one becomes public and the other is '
+                      'private', '']
     card = Flashcard(ob)
     card.shuffle_cards()
     card.start_studying()
