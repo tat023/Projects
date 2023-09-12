@@ -1,6 +1,7 @@
 import random
 import json
 
+
 class Term:
     """Represents a list of terms. This list will be converted to a dictionary"""
 
@@ -44,8 +45,12 @@ class Term:
 
     def all_cards(self):
         """Converts all the terms into a JSON file"""
-        with open('all_terms.json', 'w') as self._json:
-            json.dump(self._dict, self._json)
+        json_file = 'all_terms.json'
+        data = {'terms': list(self._dict.keys()),
+                'definition': list(self._dict.values())}
+        with open(json_file, 'w') as self._json:
+            json.dump(data, self._json, indent=4)
+
 
 
 
